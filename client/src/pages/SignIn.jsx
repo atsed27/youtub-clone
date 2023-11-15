@@ -4,6 +4,9 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { loginFiler, loginStart, loginSuccess } from '../redux/userSlice';
 import { Link } from 'react-router-dom';
+import { auth, Provider } from '../firebase';
+import { signInWithPopup } from 'firebase/auth';
+
 const Container = styled.div`
   display: flex;
   align-items: center;
@@ -61,6 +64,15 @@ function SignIn() {
       dispatch(loginFiler());
     }
   };
+  const signInGoogle = async () => {
+    signInWithPopup(auth, Provider)
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <Container>
       <Wrapper>
@@ -86,6 +98,10 @@ function SignIn() {
           </Button>
         </Link>
 
+        <Title>Or</Title>
+        <Button onClick={signInGoogle} type={'submit'}>
+          Sign with Google
+        </Button>
         <Title>Or</Title>
         <Input placeholder="Name" onChange={(e) => setName(e.target.value)} />
         <Input
