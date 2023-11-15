@@ -1,4 +1,5 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -49,18 +50,25 @@ const Info = styled.div`
 `;
 
 function Card({ type, video }) {
+  const [channel, setChannel] = useState([]);
+  useEffect(() => {
+    const fetchChannel = async () => {
+      const res = await axios.get(
+        `http://localhost:5001/api/users/find/${video.UserId}`
+      );
+      setChannel(res.data);
+    };
+    fetchChannel();
+  }, [video.UserId]);
   return (
     <Link to="/video/test" style={{ textDecoration: 'none' }}>
       <Container type={type}>
-        <Image
-          type={type}
-          src="https://www.google.com/imgres?imgurl=https%3A%2F%2Fdejanstojanovic.net%2Fmedia%2F131814%2F16x9.png&tbnid=kRxQYYl3_TC0OM&vet=12ahUKEwjYlL2N_7OCAxWxmicCHZT4BU0QMygHegQIARBY..i&imgrefurl=https%3A%2F%2Fdejanstojanovic.net%2Fjavascript%2F2014%2Fnovember%2Fworking-with-canvas-on-images-loaded-from-different-domain%2F&docid=DOf6UB4ManiDwM&w=700&h=394&q=javascript%20img&ved=2ahUKEwjYlL2N_7OCAxWxmicCHZT4BU0QMygHegQIARBY"
-        />
+        <Image type={type} src={channel.img} />
         <Details type={type}>
           <ChannelImage src="https://yt3.ggpht.com/ytc/AOPolaToAOoB7zZaRe9kVmXGi6QWBBPrESpK8pcaWnBL=s48-c-k-c0x00ffffff-no-rj" />
           <Texts>
             <Title>{video.title}</Title>
-            <ChannelName> Dani_code</ChannelName>
+            <ChannelName> {channel.name} </ChannelName>
             <Info> {video.Views} views . 2 day ago </Info>
           </Texts>
         </Details>
