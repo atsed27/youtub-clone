@@ -54,7 +54,7 @@ function Card({ type, video }) {
       <Container type={type}>
         <Image
           type={type}
-          src="https://i.ytimg.com/an_webp/kn8HPNwPEkw/mqdefault_6s.webp?du=3000&sqp=CKyMzaYG&rs=AOn4CLAWln0ATNRcUNRUMAZ1OGxIugqBRg"
+          src="https://www.google.com/imgres?imgurl=https%3A%2F%2Fdejanstojanovic.net%2Fmedia%2F131814%2F16x9.png&tbnid=kRxQYYl3_TC0OM&vet=12ahUKEwjYlL2N_7OCAxWxmicCHZT4BU0QMygHegQIARBY..i&imgrefurl=https%3A%2F%2Fdejanstojanovic.net%2Fjavascript%2F2014%2Fnovember%2Fworking-with-canvas-on-images-loaded-from-different-domain%2F&docid=DOf6UB4ManiDwM&w=700&h=394&q=javascript%20img&ved=2ahUKEwjYlL2N_7OCAxWxmicCHZT4BU0QMygHegQIARBY"
         />
         <Details type={type}>
           <ChannelImage src="https://yt3.ggpht.com/ytc/AOPolaToAOoB7zZaRe9kVmXGi6QWBBPrESpK8pcaWnBL=s48-c-k-c0x00ffffff-no-rj" />
