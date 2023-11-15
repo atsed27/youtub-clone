@@ -65,12 +65,25 @@ function SignIn() {
     }
   };
   const signInGoogle = async () => {
+    dispatch(loginStart());
+
     signInWithPopup(auth, Provider)
       .then((result) => {
         console.log(result);
+        axios
+          .post('http://localhost:3000/auth/google', {
+            name: result.user.displayName,
+            email: result.user.email,
+            img: result.user.photoURL,
+          })
+          .then((res) => {
+            dispatch(loginSuccess(res.date));
+          });
       })
       .catch((error) => {
         console.log(error);
+
+        dispatch(loginFiler());
       });
   };
   return (

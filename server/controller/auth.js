@@ -42,3 +42,33 @@ export const signIn = async (req, res, next) => {
     next(error);
   }
 };
+
+export const googleAuth = async () => {
+  try {
+    const user = await User.findOne({ email: req.body.email });
+    if (user) {
+      const token = jwt.sign({ id: user._id }, process.env.Jwt_S);
+      res
+        .cookie('tokenye', token, {
+          httpOnly: true,
+        })
+        .status(200)
+        .json(user._doc);
+    } else {
+      const newUser = new User({
+        ...req.body,
+        fromGoogle: true,
+      });
+      const saveUser = await newUser.save();
+      const token = jwt.sign({ id: saveUser._id }, process.env.Jwt_S);
+      res
+        .cookie('tokenye', token, {
+          httpOnly: true,
+        })
+        .status(200)
+        .json(saveUser._doc);
+    }
+  } catch (error) {
+    next(error);
+  }
+};
